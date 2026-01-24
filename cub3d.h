@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:29:58 by keezgi            #+#    #+#             */
-/*   Updated: 2025/12/26 13:40:46 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/25 01:30:33 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 
 // structs
 
+typedef struct s_list
+{
+    char *content;
+    size_t length;
+    size_t width;
+    struct s_list *next;
+} t_list;
+
 typedef struct s_parse
 {
     bool west_set;
@@ -33,7 +41,6 @@ typedef struct s_parse
     bool floor_set;
     bool ceiling_set;
     bool is_map_started;
-    bool is_player_set;
     char *west_file;
     char *east_file;
     char *north_file;
@@ -50,14 +57,9 @@ typedef struct s_parse
 
 typedef struct s_game
 {
-    t_parse parse;
+    t_parse *parse;
+    t_list *map;
 } t_game;
-
-typedef struct s_list
-{
-    char *content;
-    struct s_list *next;
-} t_list;
 
 // utils
 void    print_err(char *str);
@@ -70,10 +72,14 @@ int	ft_atoi(char *str);
 size_t ft_strlen(char *str);
 
 // list utils
-void    list_add_back(t_list **list , char *content);
+void    list_add_back(t_list **list , char *content , int length);
+size_t get_list_size(t_list *list);
 
 // arg parse
 int    arg_parse(char *str);
 
-void    read_file(t_parse *parse, char *file);
+void    read_file(t_game *game, char *file);
+
+//handle map
+int handle_map(t_game *game);
 #endif
