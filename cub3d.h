@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:29:58 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 04:16:01 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/25 22:58:27 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,18 @@ size_t ft_strlen(char *str);
 void    list_add_back(t_list **list , char *content , int length);
 size_t get_list_size(t_list *list);
 
-// arg parse
-int    arg_parse(char *str);
-
 void    read_file(t_game *game, char *file);
 
 //handle map
 int handle_map(t_game *game);
+
+//map utils
+char **list_to_matrix(t_list *map);
+char **copy_matrix(char **map, size_t height);
+int get_matrix_height(char **map);
+size_t find_max_width(t_list *map);
+
+//map algorithm
+void flood_fill(char **map, int x, int y, int width, int height);
+void set_player_location(t_game *game);
 #endif

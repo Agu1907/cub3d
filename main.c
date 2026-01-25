@@ -55,6 +55,19 @@ void print_map_debug(char **map)
 }
 
 
+int    arg_parse(char *str)
+{
+    size_t pos;
+
+    pos = ft_strlen(str);
+    if (pos < 5 || ft_strcmp(&str[pos - 4] , ".cub"))
+    {
+        print_err("File extension doesn't end with .cub");
+        exit(1);
+    }
+    return (0);
+}
+
 int main (int ac, char **av)
 {
     t_game game;
@@ -62,12 +75,12 @@ int main (int ac, char **av)
     {
         arg_parse(av[1]);
         read_file(&game ,av[1]);
-        print_map_list(game.map);
         if(!handle_map(&game))
         {
             // free hata kontrolu eklenecek (garbage collector freesi)
             return (1);
         }
+        print_map_debug(game.matrix_map);
     }
     else
     {
@@ -77,38 +90,6 @@ int main (int ac, char **av)
 }
 
 /*
-keezgi@k1m23s03 ~/Masaüstü/cub3d
- % ./cub3d map/map.cu 
-Error
-File extension doesn't end with .cub
-Error
-File doesn't have read permission!           ----------------------> ÇÖZÜLDÜ
-keezgi@k1m23s03 ~/Masaüstü/cub3d
-
-========================================
-
-keezgi@k1m23s03 ~/Masaüstü/cub3d
- % ./cub3d map/map.cu
-Error
-File extension doesn't end with .cub                              ---------------------------> ÇÖZÜLDÜ
-
---- MAP DEBUG START ---
-[0] |2222222211111111111111111111111111111112222222222222222222222222222222222|
-[1] |222222221FFFFFFFFFFFFFFFFFFFFFFFFFFFF111111111111111111111111111111111112|
-[2] |222222221F1111111FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF12|
-[3] |222222221F11FFFFFFFFFFFFFFFFFFFF11111111111111111111111111111111111111112|
-[4] |222222221F11FFFFFFFFFFFFFFFFFFFF12222222222222222222222222222222222222222|
-[5] |222222221F11FFFFFFFFFFFFFFFFFFFF12222222222222222222222222222222222222222|
-[6] |222222221F11FFFFFFFFFFFFFFFFFFFF11122222222222222222222222222222222222222|
-[7] |22222222111111FFFFFFFFFFFFFFFFFFFF111112222222222222222222222222222222222|
-[8] |222222222222211111FFFFFFFFFFFFFFFFFFFF11111111111111111111111111111111111|
-[9] |22222222222222221FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF12|
-[10] |22222222222222221FFFFFFFFFFFFFFFFFFFF111111111111111111111111111111111112|
-[11] |2222222222222222111111111111111111111122222222222222222222222222222222222|
---- MAP DEBUG END ---
-
-keezgi@k1m23s03 ~/Masaüstü/cub3d
- % 
 
 
  ===================================================================
