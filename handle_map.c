@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 05:03:23 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 01:31:58 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/25 03:18:04 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,25 @@ int    check_rows(t_list *map , int *is_player_set)
     return (1);
 }
 
+char **list_to_matrix(t_list *map)
+{
+    char **matrix;
+    t_list *temp;
+    size_t i;
+    
+    matrix = malloc(sizeof(char *) * get_list_size(map) + 1);
+    temp = map;
+    i = 0;
+    while (temp)
+    {
+        matrix[i] = ft_strdup(temp->content);
+        temp = temp->next;
+        i++;
+    }
+    matrix[i] = NULL;
+    return (matrix);
+}
+
 int handle_map(t_game *game)
 {
     size_t max_width;
@@ -109,5 +128,6 @@ int handle_map(t_game *game)
         return (0);
     max_width = find_max_width(game->map);
     fill_map_with_two(game->map , max_width);
+    game->matrix_map = list_to_matrix(game->map);
     return (1);
 }

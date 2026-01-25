@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:30:52 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 01:31:30 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/25 03:19:46 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,27 @@ void    print_map_list(t_list *map)
     printf("--------------------------------\n");
 }
 
+void print_map_debug(char **map)
+{
+    int i;
+
+    i = 0;
+    if (!map)
+    {
+        printf("Error: Map is NULL\n");
+        return ;
+    }
+    printf("\n--- MAP DEBUG START ---\n");
+    while (map[i])
+    {
+        // Eğer satır sonlarında hala \n varsa alt satıra kaymış gibi görünebilir.
+        // Amaç satırın bittiği yeri görmektir.
+        printf("[%d] |%s|\n", i, map[i]);
+        i++;
+    }
+    printf("--- MAP DEBUG END ---\n\n");
+}
+
 
 int main (int ac, char **av)
 {
@@ -46,7 +67,7 @@ int main (int ac, char **av)
             // free hata kontrolu eklenecek (garbage collector freesi)
             return (1);
         }
-        print_map_list(game.map);
+        print_map_debug(game.matrix_map);
     }
     else
     {

@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:29:58 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 01:30:33 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/25 03:23:24 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ typedef struct s_parse
 
 typedef struct s_game
 {
-    t_parse *parse;
+    t_parse parse;
     t_list *map;
+    char **matrix_map;
 } t_game;
 
 // utils
