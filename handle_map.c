@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 05:03:23 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 23:01:38 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 01:04:23 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,61 +25,59 @@ void    fill_map_with_two(t_list *map, size_t max_width)
         i = 0;
         while (tmp->content[i] && tmp->content[i] != '\n')
         {
+            new_row[i] = tmp->content[i];
             if (tmp->content[i] == ' ')
                 new_row[i] = '2';       
-            else                       
-                new_row[i] = tmp->content[i]; 
             i++;
         }
         while (i < max_width)
-        {
-            new_row[i] = '2';
-            i++;
-        }
+            new_row[i++] = '2';
         new_row[i] = '\0';
         tmp->content = new_row;
         tmp->width = max_width;
         tmp = tmp->next;
     }
 }
-int    check_rows(t_list *map , int *is_player_set)
+
+int	check_char(char c, int *is_player_set)
 {
-    t_list *tmp;
-    int i;
-    tmp = map;
-    while (tmp)
-    {
-        i = 0;
-        while (tmp->content[i] && tmp->content[i] != '\n')
-        {
-            if (tmp->content[i] == '\t' || tmp->content[i] == ' ')
-                i++;
-            else if (tmp->content[i] == '1' || tmp->content[i] == '0')
-                i++;
-            else if ((tmp->content[i] == 'N' || tmp->content[i] == 'S' || tmp->content[i] == 'E' || tmp->content[i] == 'W') && *is_player_set == false)
-            {
-                *is_player_set = true;
-                i++;
-            }
-            else if ((tmp->content[i] == 'N' || tmp->content[i] == 'S' || tmp->content[i] == 'E' || tmp->content[i] == 'W') && *is_player_set == true)
-            {
-                print_err("Multiple character definition on map!");
-                return (0);
-            }
-            else
-            {
-                print_err("Undefined character on map!");
-                return (0);
-            }
-        }
-        tmp = tmp->next;
-    }
-    if (*is_player_set == false)
-    {
-        print_err("No character on map!");
-        return (0);
-    }
-    return (1);
+	if (c == ' ' || c == '\t' || c == '1' || c == '0')
+		return (1);
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	{
+		if (*is_player_set)
+		{
+			print_err("Multiple character definition on map!");
+			return (0);
+		}
+		*is_player_set = true;
+		return (1);
+	}
+	print_err("Undefined character on map!");
+	return (0);
+}
+
+int	check_rows(t_list *map, int *is_player_set)
+{
+	int		i;
+
+	while (map)
+	{
+		i = 0;
+		while (map->content[i] && map->content[i] != '\n')
+		{
+			if (!check_char(map->content[i], is_player_set))
+				return (0);
+			i++;
+		}
+		map = map->next;
+	}
+	if (*is_player_set == false)
+	{
+		print_err("No character on map!");
+		return (0);
+	}
+	return (1);
 }
 
 int handle_map(t_game *game)
