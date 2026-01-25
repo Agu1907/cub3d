@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:52:55 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 03:27:04 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/25 17:38:04 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,15 @@ void    read_file(t_game *game, char *file)
         while (line[i] == ' ' || line[i] == '\t')
             i++;
         if (line[i] == '\n')
+        {
+            if (game->parse.is_map_started == true) // buraya mapin 2 ye ayrılma durumu için koydum bunu bir konuşup düşünmemiz lazım ! (mantıksal) (tek düşüncem mapin başına sonuna undefined character verince undefined hatası yerine map cant be seperated with nl hatası basıyor mantığından dolayı)
+            {
+                print_err("Map can't be seperated with newline!");
+                // list free;
+                exit (1);
+            }
             continue;
+        }
         else if (line[i] == 'N' && line[i + 1] == 'O' && game->parse.is_map_started == false && game->parse.north_set == false)
         {
             i += 2;

@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:31:46 by keezgi            #+#    #+#             */
-/*   Updated: 2025/12/19 17:31:04 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/25 16:54:27 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int    arg_parse(char *str)
     if (pos < 5 || ft_strcmp(&str[pos - 4] , ".cub"))
     {
         print_err("File extension doesn't end with .cub");
-        return (1);
+        exit(1);
     }
     return (0);
 }

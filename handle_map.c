@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 05:03:23 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 07:05:47 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/25 17:29:37 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,29 @@ void    fill_map_with_two(t_list *map, size_t max_width)
     t_list  *tmp;
     char    *new_row;
     size_t     i;
-    size_t     j;
 
     tmp = map;
     while (tmp)
     {
-        if (tmp->width < max_width || (tmp->width > 0))
+        new_row = malloc(sizeof(char) * (max_width + 1));
+        i = 0;
+        while (tmp->content[i] && tmp->content[i] != '\n')
         {
-            new_row = malloc(sizeof(char) * (max_width + 1));
-            i = 0;
-            j = 0;
-            while (tmp->content[i] && tmp->content[i] != '\n')
-            {
-                new_row[i] = tmp->content[i];
-                i++;
-            }
-            while (i < max_width)
-            {
-                new_row[i] = '2';
-                i++;
-            }
-            new_row[i] = '\0';
-            free(tmp->content);
-            tmp->content = new_row;
-            tmp->width = max_width;
+            if (tmp->content[i] == ' ')
+                new_row[i] = '2';       
+            else                       
+                new_row[i] = tmp->content[i]; 
+            i++;
         }
+        while (i < max_width)
+        {
+            new_row[i] = '2';
+            i++;
+        }
+        new_row[i] = '\0';
+        free(tmp->content);
+        tmp->content = new_row;
+        tmp->width = max_width;
         tmp = tmp->next;
     }
 }
@@ -162,7 +160,7 @@ void flood_fill(char **map, int x, int y, int width, int height)
         return;
 
     // Boşluk (' ') ise -> HATA
-    if (map[y][x] == ' ')
+    if (map[y][x] == '2')
     {
         print_err("Map is not closed (Space found inside)!");
         exit(1);
@@ -206,7 +204,7 @@ void check_map_closed(t_game *game)
     if (!found) 
     {
         print_err("Player not found for flood fill!");
-        exit(1); 
+        exit(1);
     }
     flood_fill(game->tmp, p_x, p_y, ft_strlen(game->matrix_map[0]), get_matrix_height(game->matrix_map));
 }
