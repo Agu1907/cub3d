@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 05:03:23 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 03:18:04 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/25 07:05:47 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,110 @@ char **list_to_matrix(t_list *map)
     return (matrix);
 }
 
+// flood fill için matrix kopyası başlangıcı
+
+int get_matrix_height(char **map)
+{
+    int i = 0;
+    while (map && map[i])
+        i++;
+    return (i);
+}
+char **copy_matrix(char **map, size_t height)
+{
+    char **copy;
+    size_t i;
+
+    copy = malloc(sizeof(char *) * (height + 1));
+    i = 0;
+    while (i < height)
+    {
+        copy[i] = ft_strdup(map[i]);
+        i++;
+    }
+    copy[i] = NULL;
+    return (copy);
+}
+
+// flood fill için matrix kopyası bitişi
+
+void flood_fill(char **map, int x, int y, int width, int height)
+{
+    // 1. SINIR KONTROLÜ
+    // Harita dışına çıktıysa -> Map açık demektir (HATA)
+    if (x < 0 || y < 0 || y >= height || x >= width)
+    {
+        printf("Error: Map is not closed (Player can go outside)!\n");
+        exit(1);
+    }
+
+    // 2. KARAKTER KONTROLÜ
+    // Duvar ('1') veya gidilmiş yer ('F') ise dur.
+    if (map[y][x] == '1' || map[y][x] == 'F')
+        return;
+
+    // Boşluk (' ') ise -> HATA
+    if (map[y][x] == ' ')
+    {
+        print_err("Map is not closed (Space found inside)!");
+        exit(1);
+    }
+    map[y][x] = 'F';
+    flood_fill(map, x + 1, y, width, height);
+    flood_fill(map, x - 1, y, width, height);
+    flood_fill(map, x, y + 1, width, height);
+    flood_fill(map, x, y - 1, width, height);
+}
+
+void check_map_closed(t_game *game)
+{
+    int     p_x;
+    int     p_y;
+    int     i;
+    int     j;
+    int     found;
+    if (!game->matrix_map)
+        return;
+    found = 0;
+    i = 0;
+    while (game->matrix_map[i])
+    {
+        j = 0;
+        while (game->matrix_map[i][j])
+        {
+            if (ft_strchr("NSWE", game->matrix_map[i][j]))
+            {
+                p_x = j;
+                p_y = i;
+                found = 1;
+                break; // İlk oyuncuyu bulunca çık (Zaten tek oyuncu kontrolü yapmışsındır)
+            }
+            j++;
+        }
+        if (found)
+            break;
+        i++;
+    }
+    if (!found) 
+    {
+        print_err("Player not found for flood fill!");
+        exit(1); 
+    }
+    flood_fill(game->tmp, p_x, p_y, ft_strlen(game->matrix_map[0]), get_matrix_height(game->matrix_map));
+}
 int handle_map(t_game *game)
 {
     size_t max_width;
+    size_t max_height;
     int is_player_set;
     is_player_set = false;
     if (!check_rows(game->map , &is_player_set))
         return (0);
     max_width = find_max_width(game->map);
+    max_height = get_list_size(game->map);
     fill_map_with_two(game->map , max_width);
     game->matrix_map = list_to_matrix(game->map);
+    game->tmp = copy_matrix(game->matrix_map , max_height);
+    check_map_closed(game);
     return (1);
 }
