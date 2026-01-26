@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:52:55 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/26 06:19:42 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 07:26:11 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,13 @@ static void	process_line(t_game *game, char *line)
 		handle_map_line(game, line);
 }
 
-
-static void    init_parse_variables(t_game *game)
-{
-    game->map = NULL;
-    game->parse.north_set = false;
-    game->parse.south_set = false;
-    game->parse.west_set = false;
-    game->parse.east_set = false;
-    game->parse.floor_set = false;
-    game->parse.ceiling_set = false;
-    game->parse.is_map_started = false;
-}
-
 void	read_file(t_game *game, char *file)
 {
 	int		fd;
 	char	*line;
 
-	init_parse_variables(game);
+	ft_bzero(&game->parse , sizeof(t_parse));
+	game->map = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		print_err_exit("File doesn't have read permission!");

@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:29:58 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/26 06:33:41 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 07:25:13 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	**ft_split(char *s, char c);
 int	ft_atoi(char *str);
 size_t ft_strlen(char *str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_bzero(void *s, size_t n);
 
 // list utils
 void    list_add_back(t_list **list , char *content , int length);

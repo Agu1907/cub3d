@@ -1,5 +1,3 @@
-C0,0,255 textureların bitişik durumununda textureların nasıl alındığına bakılacak (read_file.c/process_line 43:1)
-
 Bazı durumlarda hata durumunda donen mesajlar test edilecek (iyileştirme amaçlı)
 
 Malloclar gb ye çekilecek , çekildikten sonra map parsing e kadar leak kontrolu yapılacak (exit durumları vb.) (get_next_line dakilerde çekilebilir ona bakılacak çünkü loopta line ı freeliyorum çokta bir problem yok gibi)
