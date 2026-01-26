@@ -6,11 +6,11 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:53:35 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 01:09:35 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 06:34:24 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 size_t ft_strlen(char *str)
 {

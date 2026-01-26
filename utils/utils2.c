@@ -6,11 +6,11 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 03:41:06 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/26 03:42:51 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 06:34:27 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

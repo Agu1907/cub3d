@@ -6,11 +6,11 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:35:15 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/26 06:14:32 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 06:34:08 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 void    print_err(char *str)
 {

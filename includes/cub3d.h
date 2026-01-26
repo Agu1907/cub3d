@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:29:58 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/26 06:19:34 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 06:33:41 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <fcntl.h>
 #include <stdbool.h>
 
-#include "get_next_line/get_next_line.h"
+#include "get_next_line.h"
 
 
 // structs

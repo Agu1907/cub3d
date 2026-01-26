@@ -1,12 +1,12 @@
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I./includes
 
 NAME = cub3d
 
-SRC = main.c utils/utils.c utils/error_utils.c utils/ft_split.c utils/list_utils.c \
-	read_file.c  get_next_line/get_next_line.c get_next_line/get_next_line_utils.c handle_map.c map_algorithm.c map_utils.c \
-	 utils/utils2.c texture_parsing.c\
+SRC = main.c utils/error_utils.c utils/ft_split.c utils/list_utils.c utils/utils.c utils/utils2.c \
+	parser/get_next_line/get_next_line_utils.c parser/get_next_line/get_next_line.c parser/handle_map.c parser/map_algorithm.c \
+	parser/map_utils.c parser/read_file.c parser/texture_parsing.c
 
 OBJ = $(SRC:.c=.o)
 

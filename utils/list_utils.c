@@ -6,11 +6,11 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:31:00 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/25 01:11:00 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 06:34:19 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 void    list_add_back(t_list **list, char *content , int length)
 {

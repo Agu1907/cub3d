@@ -6,11 +6,11 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 17:44:57 by keezgi            #+#    #+#             */
-/*   Updated: 2025/12/26 13:29:27 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 06:34:15 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 static int	ft_wordcount(char const *s, char c)
 {
