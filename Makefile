@@ -1,6 +1,6 @@
-CC = cc
+CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I./includes
+CFLAGS = -Wall -Wextra -Werror -g -I./includes
 
 NAME = cub3d
 
@@ -13,7 +13,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJ) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)

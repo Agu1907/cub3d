@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 06:16:42 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/26 06:18:11 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 14:08:19 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ void	set_rgb(t_game *game, char *line, int i, char type)
 	char	**tab;
 	int		rgb[3];
 	int		j;
+	int		index;
 
 	j = 0;
+	index = 0;
 	while (line[i + j])
 	{
 		if (line[i + j] == '\n')
@@ -62,13 +64,15 @@ void	set_rgb(t_game *game, char *line, int i, char type)
 	}
 	check_comma_count(line + i);
 	tab = ft_split(line + i, ',');
-	if (!tab || !tab[0] || !tab[1] || !tab[2] || tab[3])
+	while (tab[index] && index < 3)
+	{
+		rgb[index] = ft_atoi(tab[index]);
+		if (rgb[index] == -1)
+			print_err_exit("Invalid RGB value (must be 0-255 and numeric)!");
+		index++;
+	}
+	if (index != 3)
 		print_err_exit("Missing or extra arguments for RGB!");
-	rgb[0] = ft_atoi(tab[0]);
-	rgb[1] = ft_atoi(tab[1]);
-	rgb[2] = ft_atoi(tab[2]);
-	if (rgb[0] == -1 || rgb[1] == -1 || rgb[2] == -1)
-		print_err_exit("Invalid RGB value (must be 0-255 and numeric)!");
 	save_rgb_to_struct(game, rgb, type);
 }
 
@@ -79,7 +83,7 @@ void	set_texture(char **path, bool *flag, char *line, int i)
 
 	if (*flag == true)
 		print_err_exit("Multiple definition of textures!");
-	i += 2;
+	i += 3;
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	start = i;

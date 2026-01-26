@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:52:55 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/26 07:26:11 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 14:04:11 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static void	process_line(t_game *game, char *line)
 	else if (!ft_strncmp(&line[i], "EA ", 3))
 		set_texture(&game->parse.east_file, &game->parse.east_set, line, i);
 	else if (!ft_strncmp(&line[i], "F ", 2))
-		set_rgb(game, line, i + 1, 'F');
+		set_rgb(game, line, i + 2, 'F');
 	else if (!ft_strncmp(&line[i], "C ", 2))
-		set_rgb(game, line, i + 1, 'C');
+		set_rgb(game, line, i + 2, 'C');
 	else
 		handle_map_line(game, line);
 }
