@@ -6,7 +6,7 @@
 /*   By: keezgi <keezgi@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 22:53:32 by keezgi            #+#    #+#             */
-/*   Updated: 2026/01/26 01:08:07 by keezgi           ###   ########.fr       */
+/*   Updated: 2026/01/26 06:23:51 by keezgi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void flood_fill(char **map, int x, int y, int width, int height)
 {
     if (x < 0 || y < 0 || y >= height || x >= width)
     {
-        print_err("Map is not closed (Player can go outside)!\n");
+        print_err("Map is not closed (Player can go outside)!");
         exit(1);
     }
     if (map[y][x] == '1' || map[y][x] == 'F')
